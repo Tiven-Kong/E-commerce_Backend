@@ -57,7 +57,42 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(Request $request , )
+    public function update(Request $request , $id ){
+
+     $find = Product::find($id)  ; 
+
+     if(!$find)
+{
+    return response()->json(['message'=>'can not find your id that you want to update']) ; 
+}
+
+$fill = $request->all() ; 
+
+$find->update($fill)  ; 
+
+return response()->json(['message'=>'your data have been updated']) ; 
+
+
+
+
+    }
+
+    protected function destroy($id){
+
+
+        $find = Product::find($id)  ; 
+
+        if(!$find)
+   {
+       return response()->json(['message'=>'can not find your id that you want to update']) ; 
+   }
+
+
+
+   $find->delete() ;
+   return response()->json(['message'=>'delete']) ;
+
+    }
     
 
 }
